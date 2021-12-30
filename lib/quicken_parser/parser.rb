@@ -90,20 +90,6 @@ module QuickenParser
     # but hey, I want something that works NOW, rather than something that might
     # work in 20 years...
     def add_xml_decl! #:nodoc:
-      converted = @input.unpack("C*").map do |c|
-        if ASCII.include?(c) then
-          c
-        else
-          case c
-          when 168, 170, 233;   ?e
-          when 195;             nil
-          when 244;             ?o
-          else;                 ?_
-          end
-        end
-      end
-
-      @input = converted.pack("C*")
       @input = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n#{@input}"
     end
 
